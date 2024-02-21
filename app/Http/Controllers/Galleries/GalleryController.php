@@ -31,7 +31,7 @@ class GalleryController extends Controller
                 // Validate if the file is an image (you may want to add more specific validation)
                 $data = $file->store('image');  // store() method automatically generates a unique filename
                 Galleries::create([
-                    "category" => $file->category,
+                    "category" => $request->category,
                     "image" => $data,
                 ]);
             }

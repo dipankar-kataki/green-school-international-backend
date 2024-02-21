@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Blogs\BlogController;
+use App\Http\Controllers\ChatAnswers\ChatAnswersController;
+use App\Http\Controllers\ChatQuestions\ChatQuestionController;
 use App\Http\Controllers\Galleries\GalleryController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Http\Request;
@@ -21,6 +23,14 @@ Route::post('forgotpassword', [UserController::class, 'forgotPassword'])->name('
 Route::post('resetpassword', [UserController::class, 'resetPassword'])->name('resetpassword');
 Route::post('create', [UserController::class, 'create'])->name("create");
 
+Route::get('list', [GalleryController::class, 'index']);
+Route::get('get/{id}', [GalleryController::class, 'show']);
+
+Route::get('get/{id}', [ChatQuestionController::class, 'show']);
+
+Route::get('list', [BlogController::class, 'index']);
+Route::get('get/{id}', [BlogController::class, 'show']);
+
 Route::group(["middleware" => 'auth:sanctum'], function () {
     Route::group(['prefix' => 'users'], function () {
         Route::get('list', [UserController::class, 'index']);
@@ -32,30 +42,26 @@ Route::group(["middleware" => 'auth:sanctum'], function () {
     });
     Route::group(['prefix' => 'galleries'], function () {
         Route::post('create', [GalleryController::class, 'create']);
-        Route::get('list', [GalleryController::class, 'index']);
-        Route::get('get/{id}', [GalleryController::class, 'show']);
+
         Route::put('update/{id}', [GalleryController::class, 'update']);
         Route::delete('delete/{id}', [GalleryController::class, 'destroy']);
     });
     Route::group(['prefix' => 'blogs'], function () {
         Route::post('create', [BlogController::class, 'create']);
-        Route::get('list', [BlogController::class, 'index']);
-        Route::get('get/{id}', [BlogController::class, 'show']);
         Route::put('update/{id}', [BlogController::class, 'update']);
         Route::delete('delete/{id}', [BlogController::class, 'destroy']);
-    });    
+    });
     Route::group(['prefix' => 'chat_questions'], function () {
-        Route::post('create', [GalleryController::class, 'create']);
-        Route::get('list', [GalleryController::class, 'index']);
-        Route::get('get/{id}', [GalleryController::class, 'show']);
-        Route::put('update/{id}', [GalleryController::class, 'update']);
-        Route::delete('delete/{id}', [GalleryController::class, 'destroy']);
-    });    
+        Route::post('create', [ChatQuestionController::class, 'create']);
+        Route::get('list', [ChatQuestionController::class, 'index']);
+        Route::get('get/{id}', [ChatQuestionController::class, 'show']);
+        Route::put('update/{id}', [ChatQuestionController::class, 'update']);
+        Route::delete('delete/{id}', [ChatQuestionController::class, 'destroy']);
+    });
     Route::group(['prefix' => 'chat_answers'], function () {
-        Route::post('create', [GalleryController::class, 'create']);
-        Route::get('list', [GalleryController::class, 'index']);
-        Route::get('get/{id}', [GalleryController::class, 'show']);
-        Route::put('update/{id}', [GalleryController::class, 'update']);
-        Route::delete('delete/{id}', [GalleryController::class, 'destroy']);
+        Route::post('create', [ChatAnswersController::class, 'create']);
+        Route::get('list', [ChatAnswersController::class, 'index']);
+        Route::put('update/{id}', [ChatAnswersController::class, 'update']);
+        Route::delete('delete/{id}', [ChatAnswersController::class, 'destroy']);
     });
 });
