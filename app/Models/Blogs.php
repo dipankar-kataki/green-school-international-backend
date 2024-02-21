@@ -10,5 +10,12 @@ class Blogs extends Model
     use HasFactory;
     protected $table = "blogs";
     protected $guarded = [];
-
+    public static function createRules()
+    {
+        return [
+            'title' => 'required|string',
+            'content' => 'required|string',
+            'banner' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust validation rules for the image
+        ];
+    }
 }

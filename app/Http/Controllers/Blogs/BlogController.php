@@ -22,7 +22,7 @@ class BlogController extends Controller
             return $this->error('Oops!' . $validator->errors()->first(), null, null, 400);
         }
         try {
-            $data = $request->store('banner');  
+            $data = $request->store('public/banner');  
             DB::beginTransaction();
             $blog = Blogs::create([
                 "banner" => $data,
@@ -37,16 +37,17 @@ class BlogController extends Controller
         }
     }
 
-
     public function index(Request $request)
     {
-        $blogs = Blogs::get();
-
+        $blogs = Blogs::orderBy('created_at', 'desc')->get();
+    
         if ($blogs->isEmpty()) {
             return $this->error('Oops! no blogs found', null, null, 400);
         }
+    
         return $this->success("Blogs list", $blogs, null, 200);
     }
+    
     public function show(Request $request)
     {
         $blogs = Blogs::where("id",$request->id)->first();
