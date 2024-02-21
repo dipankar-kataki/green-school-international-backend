@@ -99,6 +99,7 @@ class GalleryController extends Controller
             if ($oldFilePath && Storage::exists($oldFilePath)) {
                 Storage::delete($oldFilePath);
             }
+            $galleryItem->delete();
             return $this->success("Gallery Image deleted Successfully.", null, null, 200);
         } catch (\Exception $e) {
             return $this->error('Oops! Something Went Wrong.' . $e->getMessage(), null, null, 500);
