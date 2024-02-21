@@ -36,7 +36,7 @@ class ChatQuestionController extends Controller
 
     public function index(Request $request)
     {
-        $blogs = ChatQuestions::orderBy('created_at', 'asc')->get();
+        $blogs = ChatQuestions::orderBy('question_number', 'asc')->get();
 
         if ($blogs->isEmpty()) {
             return $this->error('Oops! no Question found', null, null, 400);
