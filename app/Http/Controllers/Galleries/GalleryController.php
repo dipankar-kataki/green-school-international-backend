@@ -88,7 +88,7 @@ class GalleryController extends Controller
         }
     }
 
-    public function deleteSpecificGalleryImage(Request $request)
+    public function destroy(Request $request)
     {
         try {
             $galleryItem = Galleries::find($request->id);
