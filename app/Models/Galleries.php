@@ -14,7 +14,7 @@ class Galleries extends Model
     {
         return [
             'category' => 'required|string|in:home_banner,galleries',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust validation rules for the image
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:100048', // Adjust validation rules for the image
         ];
     }
     
