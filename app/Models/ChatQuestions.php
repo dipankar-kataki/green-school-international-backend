@@ -13,8 +13,8 @@ class ChatQuestions extends Model
     public static function createRules()
     {
         return [
-            'category' => 'required|string|in:home_banner,galleries',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust validation rules for the image
+            'question' => 'required|string',
+            'question_number' => 'required|integer', 
         ];
     }
 }

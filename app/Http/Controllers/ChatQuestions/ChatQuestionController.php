@@ -36,10 +36,10 @@ class ChatQuestionController extends Controller
 
     public function index(Request $request)
     {
-        $blogs = Blogs::get();
+        $blogs = ChatQuestions::orderBy('created_at', 'asc')->get();
 
         if ($blogs->isEmpty()) {
-            return $this->error('Oops! no blogs found', null, null, 400);
+            return $this->error('Oops! no Question found', null, null, 400);
         }
         return $this->success("Blogs list", $blogs, null, 200);
     }
@@ -48,7 +48,7 @@ class ChatQuestionController extends Controller
     public function updateBlog(Request $request)
     {
         try {
-            $blogs = Blogs::find($request->id);
+            $blogs = ChatQuestions::find($request->id);
             if (!$blogs) {
                 return $this->error('Oops! no blogs found', null, null, 400);
             }
