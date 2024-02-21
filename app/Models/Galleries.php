@@ -13,7 +13,7 @@ class Galleries extends Model
     {
         return [
             'category' => 'required|string|in:home_banner, galleries',
-            'images' => 'required',
+            'image' => 'required',
         ];
     }
 }
