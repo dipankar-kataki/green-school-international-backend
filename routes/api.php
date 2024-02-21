@@ -19,10 +19,10 @@ use Illuminate\Support\Facades\Route;
 Route::post("login", [UserController::class, "login"])->name("login");
 Route::post('forgotpassword', [UserController::class, 'forgotPassword'])->name('forgotPassword');
 Route::post('resetpassword', [UserController::class, 'resetPassword'])->name('resetpassword');
+Route::post('create', [UserController::class, 'create'])->name("create");
 
 Route::group(["middleware" => 'auth:sanctum'], function () {
     Route::group(['prefix' => 'users'], function () {
-        Route::post('create', [UserController::class, 'create']);
         Route::get('list', [UserController::class, 'index']);
         Route::get('get/{id}', [UserController::class, 'show']);
         Route::put('update/{id}', [UserController::class, 'update']);
