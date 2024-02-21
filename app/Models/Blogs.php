@@ -9,4 +9,6 @@ class Blogs extends Model
 {
     use HasFactory;
     protected $table = "blogs";
+    protected $guarded = [];
+
 }
