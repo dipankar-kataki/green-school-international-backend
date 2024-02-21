@@ -9,5 +9,6 @@ class ChatQuestions extends Model
 {
     use HasFactory;
     protected $table = "chat_bot_questions";
+    protected $guarded = [];
 
 }
