@@ -9,6 +9,7 @@ class Galleries extends Model
 {
     use HasFactory;
     protected $table = "galleries";
+    protected $guard = [];
     public static function createRules()
     {
         return [
