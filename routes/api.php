@@ -23,13 +23,13 @@ Route::post('forgotpassword', [UserController::class, 'forgotPassword'])->name('
 Route::post('resetpassword', [UserController::class, 'resetPassword'])->name('resetpassword');
 Route::post('create', [UserController::class, 'create'])->name("create");
 
-Route::get('list', [GalleryController::class, 'index']);
-Route::get('get/{id}', [GalleryController::class, 'show']);
 
-Route::get('get/{id}', [ChatQuestionController::class, 'show']);
-
-Route::get('list', [BlogController::class, 'index']);
-Route::get('get/{id}', [BlogController::class, 'show']);
+Route::get('galleries/list', [GalleryController::class, 'index'])->name("galleryList");
+Route::get('galleries/get/{id}', [GalleryController::class, 'show'])->name("galleryShow");
+Route::get('chat_questions/list', [ChatQuestionController::class, 'index'])->name("chatqList");
+Route::get('chat_questions/get/{id}', [ChatQuestionController::class, 'show'])->name("chatAshow");
+Route::get('blogs/list', [BlogController::class, 'index'])->name("blogsList");
+Route::get('blogs/get/{id}', [BlogController::class, 'show'])->name("blogsShow");
 
 Route::group(["middleware" => 'auth:sanctum'], function () {
     Route::group(['prefix' => 'users'], function () {
