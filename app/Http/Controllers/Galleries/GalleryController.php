@@ -17,25 +17,38 @@ class GalleryController extends Controller
     {
         try {
             $uploadedFiles = $request->file('images');
-            // Validate if files were uploaded
+    
             if (!$uploadedFiles) {
                 return $this->error("No files uploaded.", null, null, 400);
             }
+    
             DB::beginTransaction();
-            // Iterate through each uploaded file
+    
             foreach ($uploadedFiles as $file) {
-                $validator = Validator::make($file, Galleries::createRules());
+                // Adjust validation based on your requirements
+                $validator = Validator::make(
+                    [
+                        'file' => $file,
+                        'category' => $request->input('category'), // Assuming category is in the request
+                    ],
+                    Galleries::createRules()
+                );
+    
                 if ($validator->fails()) {
                     return $this->error('Oops!' . $validator->errors()->first(), null, null, 400);
                 }
-                // Validate if the file is an image (you may want to add more specific validation)
-                $data = $file->store('image');  // store() method automatically generates a unique filename
+    
+                // Store the file in the 'public/images' directory
+                $data = $file->store('public/images');
+    
                 Galleries::create([
-                    "category" => $request->category,
+                    "category" => $request->input('category'), // Assuming category is in the request
                     "image" => $data,
                 ]);
             }
+    
             DB::commit();
+    
             return $this->success("Files uploaded successfully", null, null, 201);
         } catch (\Exception $e) {
             DB::rollBack();
