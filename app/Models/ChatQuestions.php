@@ -15,6 +15,7 @@ class ChatQuestions extends Model
         return [
             'question' => 'required|string',
             'question_number' => 'required|integer', 
+            "type"=>"required|string|in:choices,subjective"
         ];
     }
 }

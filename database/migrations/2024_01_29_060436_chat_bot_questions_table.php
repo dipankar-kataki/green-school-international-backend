@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('question');
             $table->string('question_number')->unique();
+            $table->string('type');
             $table->timestamps();
         });
     }
