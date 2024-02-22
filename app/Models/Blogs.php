@@ -15,7 +15,7 @@ class Blogs extends Model
         return [
             'title' => 'required|string',
             'content' => 'required|string',
-            'banner' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust validation rules for the image
+            'banner' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048', // Adjust validation rules for the image
         ];
     }
 }
