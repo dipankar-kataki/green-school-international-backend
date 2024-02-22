@@ -15,14 +15,14 @@ class BlogController extends Controller
 {
     use ApiResponse;
 
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $validator = Validator::make($request->all(), Blogs::createRules());
         if ($validator->fails()) {
             return $this->error('Oops!' . $validator->errors()->first(), null, null, 400);
         }
         try {
-            $data = $request->store('public/banner');  
+            $data = $request->banner->store('public/banner');  
             DB::beginTransaction();
             $blog = Blogs::create([
                 "banner" => $data,
