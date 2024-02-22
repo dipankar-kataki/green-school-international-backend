@@ -22,7 +22,7 @@ class BlogController extends Controller
             return $this->error('Oops!' . $validator->errors()->first(), null, null, 400);
         }
         try {
-            $data = $request->banner->store('public/banner');  
+            $data = $request->file("banner")->store('public/banner');  
             DB::beginTransaction();
             $blog = Blogs::create([
                 "banner" => $data,
