@@ -1,10 +1,5 @@
 <?php
 
-use App\Http\Controllers\Blogs\BlogController;
-use App\Http\Controllers\ChatAnswers\ChatAnswersController;
-use App\Http\Controllers\ChatQuestions\ChatQuestionController;
-use App\Http\Controllers\Galleries\GalleryController;
-use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
