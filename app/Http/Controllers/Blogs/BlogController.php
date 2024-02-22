@@ -15,7 +15,7 @@ class BlogController extends Controller
 {
     use ApiResponse;
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
         $validator = Validator::make($request->all(), Blogs::createRules());
         if ($validator->fails()) {
