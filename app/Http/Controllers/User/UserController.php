@@ -17,6 +17,28 @@ use Illuminate\Support\Str;
 class UserController extends Controller
 {
     use ApiResponse;
+    public function showLoginForm()
+    {
+        return view('login'); // Assuming you have a login blade file in resources/views/auth/login.blade.php
+    }
+    public function loginWeb(Request $request)
+    {
+        $credentials = $request->only('email-username', 'password');
+
+        if (Auth::attempt($credentials)) {
+            // Authentication passed...
+            return redirect()->intended('/dashboard'); // Redirect to a dashboard or any other route after successful login
+        }
+
+        // Authentication failed...
+        return redirect()->back()->withErrors(['email-username' => 'Invalid credentials'])->withInput();
+    }
+
+    public function logoutWeb()
+    {
+        Auth::logout();
+        return redirect('/login'); // Redirect to the login page after logout
+    }
     public function index(Request $request)
     {
         // Retrieve paginated users with a custom page size (e.g., 10 items per page)

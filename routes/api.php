@@ -42,7 +42,6 @@ Route::group(["middleware" => 'auth:sanctum'], function () {
     });
     Route::group(['prefix' => 'galleries'], function () {
         Route::post('create', [GalleryController::class, 'create']);
-
         Route::put('update/{id}', [GalleryController::class, 'update']);
         Route::delete('delete/{id}', [GalleryController::class, 'destroy']);
     });
