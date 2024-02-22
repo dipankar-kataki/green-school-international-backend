@@ -51,7 +51,7 @@ class BlogController extends Controller
     public function show(Request $request)
     {
         $blogs = Blogs::where("id",$request->id)->first();
-        if ($blogs->isEmpty()) {
+        if ($blogs == null) {
             return $this->error('Oops! no blogs found', null, null, 400);
         }
         return $this->success("Blog details", $blogs, null, 200);
