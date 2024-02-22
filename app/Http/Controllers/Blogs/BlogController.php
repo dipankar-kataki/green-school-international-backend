@@ -30,7 +30,7 @@ class BlogController extends Controller
                 "content" => $request->content,
             ]);
             DB::commit();
-            return $this->success("Blog uploaded successfully", $blog->id(), null, 201);
+            return $this->success("Blog uploaded successfully", $blog->id, null, 201);
         } catch (\Exception $e) {
             DB::rollBack();
             return $this->error('Oops! Something Went Wrong.' . $e->getMessage(), null, null, 500);
