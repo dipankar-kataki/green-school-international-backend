@@ -31,8 +31,9 @@ class GalleryController extends Controller
                 $data = $file->store('public/images');
     
                 Galleries::create([
-                    "category" => $request->category, // Assuming category is in the request
+                    "category" => $request->category, 
                     "image" => $data,
+                    "device"=> $request->device
                 ]);
             }
     
