@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('category')->nullable();
             $table->string('image');
-            $table->string('device')->nullable();
+            $table->string('device')->nullable()->default(null);
             $table->timestamps();
         });
     }
