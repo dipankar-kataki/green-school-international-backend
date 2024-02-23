@@ -27,11 +27,7 @@ class GalleryController extends Controller
             foreach ($uploadedFiles as $file) {
                 // Adjust validation based on your requirements
                 $validator = Validator::make(
-                    [
-                        'image' => $file,
-                        'category' => $request->category, 
-                        'device' => $request->device, 
-                    ],
+                    $request->all(),
                     Galleries::createRules()
                 );
     
