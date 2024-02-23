@@ -86,7 +86,7 @@ class BlogController extends Controller
         }
     }
 
-    public function deleteBlog(Request $request)
+    public function destroy(Request $request)
     {
         try {
             $galleryItem = Galleries::find($request->id);
