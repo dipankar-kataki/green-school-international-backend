@@ -30,7 +30,7 @@ class GalleryController extends Controller
                     [
                         'image' => $file,
                         'category' => $request->input('category'), 
-                        'device' => $request->input('category'), 
+                        'device' => $request->input('device'), 
                     ],
                     Galleries::createRules()
                 );
