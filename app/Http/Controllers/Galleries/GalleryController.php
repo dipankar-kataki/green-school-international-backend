@@ -26,20 +26,12 @@ class GalleryController extends Controller
     
             foreach ($uploadedFiles as $file) {
                 // Adjust validation based on your requirements
-                $validator = Validator::make(
-                    $request->all(),
-                    Galleries::createRules()
-                );
-    
-                if ($validator->fails()) {
-                    return $this->error('Oops!' . $validator->errors()->first(), null, null, 400);
-                }
-    
+  
                 // Store the file in the 'public/images' directory
                 $data = $file->store('public/images');
     
                 Galleries::create([
-                    "category" => $request->input('category'), // Assuming category is in the request
+                    "category" => $request->category, // Assuming category is in the request
                     "image" => $data,
                 ]);
             }
