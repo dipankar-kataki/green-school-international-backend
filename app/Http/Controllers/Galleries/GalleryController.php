@@ -29,7 +29,8 @@ class GalleryController extends Controller
                 $validator = Validator::make(
                     [
                         'image' => $file,
-                        'category' => $request->input('category'), // Assuming category is in the request
+                        'category' => $request->input('category'), 
+                        'device' => $request->input('category'), 
                     ],
                     Galleries::createRules()
                 );
