@@ -15,7 +15,7 @@ class Galleries extends Model
         return [
             'category' => 'required|string|in:home_banner,galleries',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:100048',
-            'device' => 'nullable|string|in:for_mobile,for_desktop'
+            'device' => 'sometimes|string|in:for_mobile,for_desktop'
         ];
     }
 }
