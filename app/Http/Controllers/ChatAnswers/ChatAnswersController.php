@@ -3,7 +3,13 @@
 namespace App\Http\Controllers\ChatAnswers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blogs;
+use App\Models\Galleries;
+use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class ChatAnswersController extends Controller
 {

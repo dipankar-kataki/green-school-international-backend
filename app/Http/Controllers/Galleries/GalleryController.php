@@ -17,28 +17,28 @@ class GalleryController extends Controller
     {
         try {
             $uploadedFiles = $request->file('images');
-    
+
             if (!$uploadedFiles) {
                 return $this->error("No files uploaded.", null, null, 400);
             }
-    
+
             DB::beginTransaction();
-    
+
             foreach ($uploadedFiles as $file) {
                 // Adjust validation based on your requirements
-  
+
                 // Store the file in the 'public/images' directory
                 $data = $file->store('public/images');
-    
+
                 Galleries::create([
-                    "category" => $request->category, 
+                    "category" => $request->category,
                     "image" => $data,
-                    "device"=> $request->device
+                    "device" => $request->device
                 ]);
             }
-    
+
             DB::commit();
-    
+
             return $this->success("Files uploaded successfully", null, null, 201);
         } catch (\Exception $e) {
             DB::rollBack();
@@ -49,7 +49,9 @@ class GalleryController extends Controller
 
     public function index(Request $request)
     {
-        $galleries = Galleries::where("category", $request->category)->latest()->get();
+        $galleries = Galleries::where("category", $request->category)
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         if ($galleries->isEmpty()) {
             return $this->error('Oops! no galleries found', null, null, 400);
