@@ -50,7 +50,7 @@ class GalleryController extends Controller
     public function index(Request $request)
     {
         $galleries = Galleries::where("category", $request->category)
-            ->orderBy('created_at', 'desc')
+            ->latest()
             ->get();
 
         if ($galleries->isEmpty()) {
