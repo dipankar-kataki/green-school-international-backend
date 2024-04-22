@@ -49,7 +49,7 @@ class GalleryController extends Controller
 
     public function index(Request $request)
     {
-        $galleries = Galleries::where("category", $request->category)->get();
+        $galleries = Galleries::where("category", $request->category)->latest()->get();
 
         if ($galleries->isEmpty()) {
             return $this->error('Oops! no galleries found', null, null, 400);
