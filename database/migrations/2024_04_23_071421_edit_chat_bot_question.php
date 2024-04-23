@@ -4,8 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
+    /**
+     * Run the migrations.
+     */
+
     /**
      * Run the migrations.
      */
@@ -13,8 +16,7 @@ return new class extends Migration
     {
         Schema::table('chat_bot_questions', function (Blueprint $table) {
             $table->dropColumn('question_number');
-            $table->dropColumn('question');
-            $table->text('question');
+            $table->text('question')->change();
             $table->string('category');
             $table->text('answer');
         });
@@ -31,7 +33,8 @@ return new class extends Migration
             $table->dropColumn('category');
             $table->dropColumn('answer');
             $table->string('question_number')->unique();
-            $table->string('question');
         });
     }
+
+
 };
