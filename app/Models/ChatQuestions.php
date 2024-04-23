@@ -10,7 +10,10 @@ class ChatQuestions extends Model
     use HasFactory;
     protected $table = "chat_bot_questions";
     protected $guarded = [];
-    public $timestamps = false;
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
     public static function createRules()
     {
         return [
