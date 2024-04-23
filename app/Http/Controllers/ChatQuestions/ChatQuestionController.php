@@ -8,6 +8,7 @@ use App\Models\ChatQuestions;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ChatQuestionController extends Controller
@@ -36,7 +37,7 @@ class ChatQuestionController extends Controller
 
     public function index(Request $request)
     {
-        $blogs = ChatQuestions::orderBy('question_number', 'asc')->get();
+        $blogs = ChatQuestions::groupBy('category')->get();
 
         if ($blogs->isEmpty()) {
             return $this->error('Oops! no Question found', null, null, 400);
@@ -45,47 +46,40 @@ class ChatQuestionController extends Controller
     }
 
 
-    public function updateBlog(Request $request)
+    public function updateQuestion(Request $request)
     {
         try {
             $blogs = ChatQuestions::find($request->id);
             if (!$blogs) {
-                return $this->error('Oops! no blogs found', null, null, 400);
+                return $this->error('Oops! no question found', null, null, 400);
             }
-            if ($request->has("title")) {
-                $blogs->title = $request->title;
+            if ($request->has('question')) {
+                $blogs->question = $request->question;
             }
-            if ($request->has("content")) {
-                $blogs->content = $request->content;
+            if ($request->has('category')) {
+                $blogs->category = $request->category;
             }
-            if ($request->has("banner")) {
-                $oldFilePath = $blogs->image;
-                if ($oldFilePath && Storage::exists($oldFilePath)) {
-                    Storage::delete($oldFilePath);
-                }
-                $data = $request->file('image')->store('image');
-                $blogs->banner = $data;
+            if ($request->has('answer')) {
+                $blogs->answer = $request->answer;
             }
 
             $blogs->save();
-            return $this->success("Blog modified.", null, null, 200);
+            return $this->success("Question modified.", null, null, 200);
         } catch (\Exception $e) {
             return $this->error('Oops! Something Went Wrong.' . $e->getMessage(), null, null, 500);
         }
     }
 
-    public function deleteBlog(Request $request)
+    public function delete(Request $request)
     {
         try {
-            $galleryItem = Galleries::find($request->id);
+            $galleryItem = ChatQuestions::find($request->id);
             if (!$galleryItem) {
-                return $this->error('Oops! no blogs found', null, null, 400);
+                return $this->error('Oops! no questions found', null, null, 400);
             }
-            $oldFilePath = $galleryItem->image;
-            if ($oldFilePath && Storage::exists($oldFilePath)) {
-                Storage::delete($oldFilePath);
-            }
-            return $this->success("Blog Deleted.", null, null, 200);
+            $galleryItem->delete();
+
+            return $this->success("Questions Deleted.", null, null, 200);
         } catch (\Exception $e) {
             return $this->error('Oops! Something Went Wrong.' . $e->getMessage(), null, null, 500);
         }

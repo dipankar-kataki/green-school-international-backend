@@ -13,9 +13,9 @@ class ChatQuestions extends Model
     public static function createRules()
     {
         return [
-            'question' => 'required|string',
-            'question_number' => 'required|integer', 
-            "type"=>"required|string|in:choices,subjective"
+            'question' => 'required|text',
+            "category"=>"required|string",
+            'answer' => 'required|text', 
         ];
     }
 }
