@@ -26,8 +26,8 @@ Route::post('create', [UserController::class, 'create'])->name("create");
 
 Route::get('galleries/list', [GalleryController::class, 'index'])->name("galleryList");
 Route::get('galleries/get/{id}', [GalleryController::class, 'show'])->name("galleryShow");
-Route::get('chat_questions/list', [ChatQuestionController::class, 'index'])->name("chatqList");
-Route::get('chat_questions/get/{id}', [ChatQuestionController::class, 'show'])->name("chatAshow");
+Route::get('chatquestions/list', [ChatQuestionController::class, 'index'])->name("chatqList");
+Route::get('chatquestions/get/{id}', [ChatQuestionController::class, 'show'])->name("chatAshow");
 Route::get('blogs/list', [BlogController::class, 'index'])->name("blogsList");
 Route::get('blogs/get/{id}', [BlogController::class, 'show'])->name("blogsShow");
 
@@ -52,8 +52,6 @@ Route::group(["middleware" => 'auth:sanctum'], function () {
     });
     Route::group(['prefix' => 'chat_questions'], function () {
         Route::post('create', [ChatQuestionController::class, 'create']);
-        Route::get('list', [ChatQuestionController::class, 'index']);
-        Route::get('get/{id}', [ChatQuestionController::class, 'show']);
         Route::put('update/{id}', [ChatQuestionController::class, 'update']);
         Route::delete('delete/{id}', [ChatQuestionController::class, 'destroy']);
     });

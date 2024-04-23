@@ -37,14 +37,14 @@ class ChatQuestionController extends Controller
 
     public function index(Request $request)
     {
-        $blogs = ChatQuestions::groupBy('category')->get();
-
+        $blogs = ChatQuestions::get();
+    
         if ($blogs->isEmpty()) {
             return $this->error('Oops! no Question found', null, null, 400);
         }
         return $this->success("Blogs list", $blogs, null, 200);
     }
-
+    
 
     public function updateQuestion(Request $request)
     {
