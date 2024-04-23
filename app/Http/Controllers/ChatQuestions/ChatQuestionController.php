@@ -38,13 +38,39 @@ class ChatQuestionController extends Controller
     public function index(Request $request)
     {
         $blogs = ChatQuestions::get();
-    
+
         if ($blogs->isEmpty()) {
             return $this->error('Oops! no Question found', null, null, 400);
         }
-        return $this->success("Blogs list", $blogs, null, 200);
+
+        $groupedQuestions = $blogs->groupBy('category');
+
+        $formattedData = [];
+
+        // Iterate over each category
+        foreach ($groupedQuestions as $category => $questions) {
+            $items = [];
+
+            // Format each question in the category
+            foreach ($questions as $question) {
+                $items[] = [
+                    'id' => $question->id,
+                    'question' => $question->question,
+                    'answer' => $question->answer,
+                    'created_at' => $question->created_at->toIso8601String(),
+                    'updated_at' => $question->updated_at->toIso8601String(),
+                ];
+            }
+
+            // Build the category structure
+            $formattedData[] = [
+                'category' => $category,
+                'items' => $items,
+            ];
+        }
+        return $this->success("Blogs list", ['data' => $formattedData], null, 200);
     }
-    
+
 
     public function updateQuestion(Request $request)
     {
