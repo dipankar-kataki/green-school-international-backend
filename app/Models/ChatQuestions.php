@@ -10,12 +10,13 @@ class ChatQuestions extends Model
     use HasFactory;
     protected $table = "chat_bot_questions";
     protected $guarded = [];
+    public $timestamps = false;
     public static function createRules()
     {
         return [
             'question' => 'required|text',
-            "category"=>"required|string",
-            'answer' => 'required|text', 
+            "category" => "required|string",
+            'answer' => 'required|text',
         ];
     }
 }
