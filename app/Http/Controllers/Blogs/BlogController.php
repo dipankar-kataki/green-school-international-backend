@@ -89,7 +89,7 @@ class BlogController extends Controller
     public function destroy(Request $request)
     {
         try {
-            $galleryItem = Galleries::find($request->id);
+            $galleryItem = Blogs::find($request->id);
             if (!$galleryItem) {
                 return $this->error('Oops! no blogs found', null, null, 400);
             }
